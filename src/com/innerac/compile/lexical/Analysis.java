@@ -51,9 +51,11 @@ public class Analysis {
 						if(nodeCode.judge(c2)){
 							continue;
 						}
+						if(nodeCode.getCode() <= 6 && c2 != ' '){
+							continue;
+						}
 					}catch(StringIndexOutOfBoundsException e){
 					}
-					
 					if(isVar){
 						int len = nodeCode.getValue().length();
 						String tmpString = testString.substring(stdex, i-len+1);
