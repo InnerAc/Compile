@@ -61,7 +61,7 @@ public class CompileTest {
 	public void testAnalysis(){
 		Analysis analysis = new Analysis();
 		
-//		String testString = "begin x:=9;if x<>0 then x:=2*x+1/3;end#";
+//		String testString = "><";
 		String testString = "begin begins:=9;"
 				+ "if(ifs<>0) then x:=2*x+1/3;end#";
 		analysis.startAnalysis(testString);
