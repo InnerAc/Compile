@@ -6,16 +6,30 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * @author innerac
+ *	字典树码表
+ *	该类用于通过文件读取保留字(单词符号)和种别码，然后建立一颗字典树。
+ *	该字典树用来进行词法分析
+ */
 public class TireTreeCode {
 
+	
+	/**
+	 * 字典树根，为了方便设置为public，理论来说应该设置为private
+	 */
 	public  NodeCode tireRoot;
 	
 	private  int nodeId = 0;
 	private  String keyString = null;
 	private  int value = 0;
 	
+	/**
+	 * 建立字典树，通过实例化的方法来调用该函数建立一颗用于词法分析的字典树
+	 * @throws FileNotFoundException
+	 */
 	@SuppressWarnings("resource")
-	public  void buildTree() throws FileNotFoundException{
+	public void buildTree() throws FileNotFoundException{
 		
 		String tablePath = System.getProperty("user.dir")+"/src/raw/codetable";
 		
@@ -46,6 +60,10 @@ public class TireTreeCode {
 		}
 		return nodeCode;
 	}
+	/**
+	 * 建树过程
+	 * 如果存在子节点便向下走，如果不存在则创建子节点
+	 */
 	public void findNode(){
 		NodeCode nc = tireRoot;
 		int kid = 0;
@@ -62,7 +80,11 @@ public class TireTreeCode {
 		}
 		
  	}
-	public  int getNodeId(){
+	/**
+	 * 得到建树的节点数，用于调试信息
+	 * @return 节点总数
+	 */
+	public int getNodeId(){
 		return nodeId;
 	}
 }
