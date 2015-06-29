@@ -51,7 +51,7 @@ public class Analysis {
 						if(nodeCode.judge(c2)){
 							continue;
 						}
-						if(nodeCode.getCode() <= 6 && c2 != ' '){
+						if(nodeCode.getCode() <= 6 && (c2 != ' ' && c2 != '(')){
 							continue;
 						}
 					}catch(StringIndexOutOfBoundsException e){
