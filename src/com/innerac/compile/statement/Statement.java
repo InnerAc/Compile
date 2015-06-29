@@ -25,6 +25,25 @@ public class Statement {
 		String rule = ".*";
 		return isJudge(rule, str);
 	}
+	
+	//Error
+	/**
+	 * 判断数字是否以0为前缀
+	 * @param str
+	 * @return
+	 */
+	public boolean err0Num(String str){
+		String rule = "(\\+|\\-)?([0-9]+)(\\.[0-9]*)?";
+		return isJudge(rule, str);
+	}
+	public boolean errnChar(String str){
+		String rule = "[\\S.]+";
+		return isJudge(rule, str);
+	}
+	public boolean erroChar(String str){
+		String rule = "[.]";
+		return isJudge(rule, str);
+	}
 	public boolean isJudge(String rule,String str){ 
 		   Pattern pattern = Pattern.compile(rule); 
 		   Matcher isNum = pattern.matcher(str);
@@ -36,7 +55,7 @@ public class Statement {
 	
 	public static void main(String arg[]){
 		Statement statement = new Statement();
-		if(statement.judgeInt("+1")){
+		if(statement.err0Num("+0")){
 			System.out.println("true");
 		}
 	}
