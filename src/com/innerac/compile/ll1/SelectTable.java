@@ -3,10 +3,23 @@ package com.innerac.compile.ll1;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author innerac
+ *	表达式文法预测分析表
+ *	文法G[S]
+ *		S->AT
+ *		A->BU
+ *		T->+AT|$
+ *		U->*BU|$
+ *		B->(S)|m
+ */
 public class SelectTable {
-	static char itoc[] = {'S','A','T','U','B','+','*','m','(',')','#'};
-	public static Map<Character, Integer> ctoi = new HashMap<Character, Integer>();
-	public static String[][] table = new String[5][6];
+	private static char itoc[] = {'S','A','T','U','B','+','*','m','(',')','#'};
+	private static Map<Character, Integer> ctoi = new HashMap<Character, Integer>();
+	private static String[][] table = new String[5][6];
+	/**
+	 * 建立预测分析表
+	 */
 	public static void init(){
 		ctoi.put('S',0);
 		ctoi.put('A',1);
@@ -34,11 +47,22 @@ public class SelectTable {
 		table[4][2] = "m";
 		table[4][3] = "(S)";
 	}
+	/**
+	 * 查预测分析表
+	 * @param n	左部
+	 * @param t	转移子
+	 * @return	文法右部
+	 */
 	public static String getNext(char n,char t){
 		int x = ctoi.get(n);
 		int y = ctoi.get(t) - 5;
 		return table[x][y];
 	}
+	/**
+	 * 判断是否为终结符
+	 * @param c	待判断字符
+	 * @return	若为终结符则返回true
+	 */
 	public static boolean isVT(char c){
 		if(ctoi.get(c) > 4)return true;
 		else return false;
