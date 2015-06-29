@@ -9,6 +9,11 @@ public class LLAnalysis {
 	}
 	public void start(String str){
 		
+		System.out.print("Step\t");
+		System.out.printf("%-30s", "Stack");
+		System.out.printf("%-30s", "String");
+		System.out.println("Rule");
+		
 		Stack<Character> stack = new Stack<Character>();
 		stack.push('#');
 		stack.push('S');
@@ -20,17 +25,18 @@ public class LLAnalysis {
 		int ant = 0;
 		try{
 			while(stack.size() > 1){
-				System.out.print(++ant+" "+stack.toString()+" ");
+				System.out.print((++ant)+"\t");
+				System.out.printf("%-30s", stack.toString());
 				c = str.charAt(index);
 				s = stack.pop();		
-				System.out.print(str.substring(index)+" ");
+				System.out.printf("%-30s", str.substring(index));
 				if(s == c){
 					System.out.println("Match "+c);
 					index++;
 					continue;
 				}
 				csString = SelectTable.getNext(s, c);
-				System.out.println(s + " -> "+ csString);
+				System.out.println(s + "->"+ csString);
 				if(csString != "$"){
 					n = csString.length();
 					cs = csString.toCharArray();
@@ -39,7 +45,10 @@ public class LLAnalysis {
 					}
 				}
 			}
-			System.out.println(++ant+" "+stack.toString()+" "+str.substring(index)+" Accept");
+			System.out.print((++ant)+"\t");
+			System.out.printf("%-30s", stack.toString());
+			System.out.printf("%-30s", str.substring(index));
+			System.out.println("Accept");
 		}catch(Exception e){
 			System.out.println("Error");
 		}

@@ -11,5 +11,6 @@ public class LL1Test {
 		LLAnalysis llAnalysis = new LLAnalysis();
 		String string = "m+m*m#";
 		llAnalysis.start(string);
+
 	}
 }
