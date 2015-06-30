@@ -36,7 +36,16 @@ public class Analysis {
 		NodeCode nodeCode = ttc.tireRoot;
 		char c,c2;
 		for(int i=0;i<N;i++){
+			
 			c = testString.charAt(i);
+//			{
+//				if(isVar)
+//					System.out.println('\n'+stdex+" true "+c);
+//				else {
+//					System.out.println('\n'+stdex+" false "+c);
+//				}
+//			}
+			
 			//遇到空格且不为数字和变量，不会出现这种情况
 			if(c == ' ' && !isVar){
 				nodeCode = ttc.tireRoot;
@@ -71,7 +80,7 @@ public class Analysis {
 							continue;
 						}
 						//当前单词符号为保留字，则后面如果不是空格或左括号便不进行归约
-						if(nodeCode.getCode() <= 6 && (c2 != ' ' && c2 != '(')){
+						if(nodeCode.getCode() <= 6 && (c2 != ' ' && c2 != '(' && c2 != '#')){
 							continue;
 						}
 					}catch(StringIndexOutOfBoundsException e){
@@ -97,6 +106,37 @@ public class Analysis {
 				//无法向下进行，该单词为变量或这数字
 				isVar = true;
 				nodeCode = ttc.tireRoot;
+				
+				//当无法归约时，可能前面为变量，后面为运算符，所以进行判断
+				if(nodeCode.judge(c)){
+					if(nodeCode.next(c).getCode() > 11){
+						String tmpString = testString.substring(stdex, i);
+						if(isNumeric(tmpString)){
+							System.out.print("(11,"+tmpString+") ");
+						}else{
+							System.out.print("(10,"+tmpString+") ");
+						}
+						isVar = false;
+						stdex = i--;
+						continue;
+					}
+				}
+				
+				//当单词遇到运算符时需要归约
+				c2 = testString.charAt(i+1);
+				if(nodeCode.judge(c2)){
+					if(nodeCode.next(c2).getCode() > 11){
+						String tmpString = testString.substring(stdex, i+1);
+						if(isNumeric(tmpString)){
+							System.out.print("(11,"+tmpString+") ");
+						}else{
+							System.out.print("(10,"+tmpString+") ");
+						}
+						isVar = false;
+						stdex = i+1;
+					}
+				}
+				
 			}
 			
 		}

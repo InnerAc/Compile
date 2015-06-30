@@ -60,12 +60,15 @@ public class CompileTest {
 	@Test
 	public void testAnalysis(){
 		Analysis analysis = new Analysis();
-		
-//		String testString = "><";
-		String testString = "begin begins:=9;"
-				+ "if(ifs<>0) then x:=2*x+1/3;end#";
-		analysis.startAnalysis(testString);
-		
+
+		String testString0 = "begin x:=9;if x>0 then x:=2*x+1/3;end#";
+		String testString1 = "begin x := 9 ; if x > 0 then x := 2 * x + 1 / 3 ; end #";
+		String testString2 = "begin begins:=9;if(i<>0) then x:=2*x+1/3;end#";
+		analysis.startAnalysis(testString0);
+		System.out.println("\n");
+		analysis.startAnalysis(testString1);
+		System.out.println("\n");
+		analysis.startAnalysis(testString2);
 	}
 	
 }
